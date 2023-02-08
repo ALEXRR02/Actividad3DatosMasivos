@@ -1,0 +1,27 @@
+# Import necessary libraries
+import numpy as np
+import pandas as pd
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+# Load the data
+data = pd.read_csv("data.csv")
+
+# Split the data into features and target variables
+X = data.iloc[:, :-1]
+y = data.iloc[:, -1]
+
+# Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+
+# Train the decision tree model
+model = DecisionTreeClassifier(criterion="entropy", random_state=0)
+model.fit(X_train, y_train)
+
+# Make predictions on the test data
+y_pred = model.predict(X_test)
+
+# Calculate the accuracy of the model
+acc = accuracy_score(y_test, y_pred)
+print("Accuracy: ", acc)
