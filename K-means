@@ -1,0 +1,22 @@
+# Import necessary libraries
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+
+# Load the data
+data = pd.read_csv("data.csv")
+
+# Extract the features from the data
+X = data.iloc[:, :-1].values
+
+# Train the K-Means model
+model = KMeans(n_clusters=3)
+model.fit(X)
+
+# Predict the cluster for each data point
+labels = model.predict(X)
+
+# Plot the data points and their corresponding clusters
+plt.scatter(X[:, 0], X[:, 1], c=labels)
+plt.show()
